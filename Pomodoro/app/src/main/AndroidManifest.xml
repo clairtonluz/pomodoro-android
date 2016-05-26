@@ -17,6 +17,11 @@
         </activity>
         <activity android:name=".activities.TaskListActivity" />
         <activity android:name=".activities.TaskActivity"></activity>
+
+        <service
+            android:name=".services.BoundService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>
