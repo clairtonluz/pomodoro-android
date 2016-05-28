@@ -8,6 +8,7 @@ import android.widget.EditText;
 import br.com.clairtonluz.pomodoro.R;
 import br.com.clairtonluz.pomodoro.daos.TaskDao;
 import br.com.clairtonluz.pomodoro.models.Task;
+import br.com.clairtonluz.pomodoro.utils.ViewUtils;
 
 public class TaskActivity extends AppCompatActivity {
 
@@ -27,11 +28,15 @@ public class TaskActivity extends AppCompatActivity {
     }
 
     public void salvar(View view) {
-        Task task = new Task(
-                titulo.getText().toString(),
-                descricao.getText().toString(),
-                Integer.valueOf(pomodoros.getText().toString()));
-        taskDao.salvar(task);
-        finish();
+        if (ViewUtils.isFilled(titulo, descricao, pomodoros)) {
+            Task task = new Task(
+                    titulo.getText().toString(),
+                    descricao.getText().toString(),
+                    Integer.valueOf(pomodoros.getText().toString()));
+            taskDao.salvar(task);
+            finish();
+        } else {
+            System.out.println("Invalid");
+        }
     }
 }
