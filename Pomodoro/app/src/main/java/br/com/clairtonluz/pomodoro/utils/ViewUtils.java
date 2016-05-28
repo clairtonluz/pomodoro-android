@@ -4,6 +4,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.widget.TextView;
@@ -33,10 +35,12 @@ public abstract class ViewUtils {
 
 
     public static void notificar(String title, String message, Context context, Class<?> activity, NotificationManager notificationManager) {
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(title)
+                        .setSound(alarmSound)
                         .setContentText(message);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(context, activity);
