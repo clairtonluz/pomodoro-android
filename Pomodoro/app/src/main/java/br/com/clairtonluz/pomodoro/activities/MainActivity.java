@@ -87,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void editar(View view) {
+        int position = listview.getPositionForView(view);
+        Task task = (Task) listview.getItemAtPosition(position);
+        if (task != null) {
+            Intent intent = new Intent(this, TaskActivity.class);
+            intent.putExtra("id", task.getId());
+            startActivity(intent);
+        }
+    }
+
     public void concluir(View view) {
         ((BoundService) serviceConnection.getServiceNotifier()).stopCounter();
     }

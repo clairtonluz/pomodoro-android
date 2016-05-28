@@ -17,6 +17,8 @@ import br.com.clairtonluz.pomodoro.utils.ViewUtils;
 
 public class BoundService extends Service implements ServiceNotifier {
 
+    public static final String VALOR_INICIAL = "25:00";
+    public static final String VALOR_FINAL = "00:00";
     private ListenValue obj;
     private IBinder binder;
     private boolean stop;
@@ -46,9 +48,9 @@ public class BoundService extends Service implements ServiceNotifier {
                             notifyValue(valor);
                             Log.i("App", "Valor: " + valor);
                             if (timeOver(valor)) {
-                                stop = true;
                                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                                 ViewUtils.notificar(task.getTitulo(), "Hora de dar uma pausa nessa tarefa.", context, MainActivity.class, notificationManager);
+                                stopCounter();
                             } else {
                                 Thread.sleep(1000);
                             }
@@ -65,11 +67,12 @@ public class BoundService extends Service implements ServiceNotifier {
     }
 
     private boolean timeOver(String valor) {
-        return valor.equals("00:00");
+        return valor.equals(VALOR_FINAL);
     }
 
     public void stopCounter() {
         this.stop = true;
+        notifyValue(VALOR_INICIAL);
     }
 
     public void closeService() {

@@ -40,13 +40,36 @@
         android:inputType="numberSigned"
         android:hint="Pomodoros" />
 
-    <Button
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salvar"
-        android:id="@+id/salvarButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="salvar" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pomodoroField"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="45dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Salvar"
+            android:id="@+id/salvarButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:onClick="salvar"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remover"
+            android:id="@+id/deleteButton"
+            android:layout_gravity="center_horizontal"
+            android:onClick="delete"
+            android:background="#ff0000"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
 </RelativeLayout>

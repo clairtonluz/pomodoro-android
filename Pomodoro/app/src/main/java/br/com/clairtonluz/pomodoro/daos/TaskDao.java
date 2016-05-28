@@ -22,6 +22,27 @@ public class TaskDao {
     }
 
     public Task salvar(Task task) {
+        return task.getId() != null && task.getId() > 0 ? update(task) : insert(task);
+    }
+
+    private Task update(Task task) {
+        ContentValues valores;
+
+        db = banco.getWritableDatabase();
+        valores = new ContentValues();
+        valores.put(Task.TITULO, task.getTitulo());
+        valores.put(Task.DESCRICAO, task.getDescricao());
+        valores.put(Task.POMODOROS, task.getPomodoros());
+
+        String where = Task.ID + "=" + task.getId();
+        String[] values = {String.valueOf(task.getId())};
+
+        long newRowId = db.update(Task.TABELA, valores, where, null);
+        db.close();
+        return task;
+    }
+
+    private Task insert(Task task) {
         ContentValues valores;
 
         db = banco.getWritableDatabase();
@@ -108,8 +129,43 @@ public class TaskDao {
     }
 
     public void remove(Integer id) {
+        db = banco.getWritableDatabase();
         String selection = Task.ID + " LIKE ?";
         String[] selectionArgs = {id.toString()};
         db.delete(Task.TABELA, selection, selectionArgs);
+        db.close();
+    }
+
+
+    public Task findById(Integer id) {
+        SQLiteDatabase db = banco.getReadableDatabase();
+        String[] projection = {
+                Task.ID,
+                Task.TITULO,
+                Task.DESCRICAO,
+                Task.POMODOROS
+        };
+
+        Cursor c = db.query(
+                Task.TABELA,  // The table to query
+                projection,                              // The columns to return
+                null,                                    // The columns for the WHERE clause
+                null,                                    // The values for the WHERE clause
+                null,                                    // don't group the rows
+                null,                                    // don't filter by row groups
+                null                                     // The sort order
+        );
+
+        Task result = null;
+
+        if (c.moveToFirst()) {
+            result = new Task();
+            result.setId(c.getInt(c.getColumnIndexOrThrow(Task.ID)));
+            result.setTitulo(c.getString(c.getColumnIndexOrThrow(Task.TITULO)));
+            result.setDescricao(c.getString(c.getColumnIndexOrThrow(Task.DESCRICAO)));
+            result.setPomodoros(c.getInt(c.getColumnIndexOrThrow(Task.POMODOROS)));
+        }
+
+        return result;
     }
 }

@@ -58,7 +58,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/linearLayout"
                 android:layout_toEndOf="@+id/linearLayout"
@@ -76,10 +76,18 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Concluído"
+                    android:text="Feito"
                     android:id="@+id/concluidoButton"
                     android:onClick="concluir"
                     android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Editar"
+                    android:id="@+id/editButton"
+                    android:layout_weight="1"
+                    android:onClick="editar" />
             </LinearLayout>
         </LinearLayout>
 
