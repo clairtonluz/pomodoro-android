@@ -37,7 +37,7 @@ public class BoundService extends Service implements ServiceNotifier {
 
     public void startCounter(final Context context, final Task task) {
         if (!isCountStarted) {
-            final Cronometro cronometro = new Cronometro(0, 0, 0, 0, 0, 10, Cronometro.REGRESSIVA);
+            final Cronometro cronometro = new Cronometro(0, 0, 0, 0, 25, 0, Cronometro.REGRESSIVA);
             isCountStarted = true;
             new Thread(new Runnable() {
                 @Override
