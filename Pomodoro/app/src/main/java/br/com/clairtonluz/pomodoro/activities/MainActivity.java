@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         int position = listview.getPositionForView(view);
         Task task = (Task) listview.getItemAtPosition(position);
         if (task != null) {
-            ((BoundService) serviceConnection.getServiceNotifier()).startCounter();
+            ((BoundService) serviceConnection.getServiceNotifier()).startCounter(this, task);
         }
     }
 
