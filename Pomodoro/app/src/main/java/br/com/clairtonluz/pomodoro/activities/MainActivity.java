@@ -82,21 +82,16 @@ public class MainActivity extends AppCompatActivity {
     public void iniciar(View view) {
         int position = listview.getPositionForView(view);
         Task task = (Task) listview.getItemAtPosition(position);
-        System.out.println("INICIAR2");
         if (task != null) {
-
-            System.out.println(task.getDescricao());
             ((BoundService) serviceConnection.getServiceNotifier()).startCounter();
         }
     }
 
     public void concluir(View view) {
-        System.out.println("CONCLUIR");
         ((BoundService) serviceConnection.getServiceNotifier()).stopCounter();
     }
 
     public void addTask(View view) {
-        System.out.println("TASK");
         startActivity(new Intent(this, TaskActivity.class));
     }
 }

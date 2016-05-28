@@ -18,11 +18,11 @@ public class ListenValueImpl implements ListenValue {
     }
 
     @Override
-    public void newValue(final long value) {
+    public void newValue(final String value) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                textView.setText(String.valueOf(value));
+                textView.setText(value);
             }
         });
     }

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import br.com.clairtonluz.pomodoro.observers.ListenValue;
 import br.com.clairtonluz.pomodoro.observers.ServiceNotifier;
+import br.com.clairtonluz.pomodoro.utils.Cronometro;
 
 public class BoundService extends Service implements ServiceNotifier {
 
@@ -29,16 +30,16 @@ public class BoundService extends Service implements ServiceNotifier {
 
     public void startCounter() {
         if (!isCountStarted) {
+            final Cronometro contagem = new Cronometro(0, 0, 0, 0, 25, 0, Cronometro.REGRESSIVA);
             isCountStarted = true;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    long count = 0;
                     while (!stop) {
                         try {
-                            count += 1;
-                            notifyValue(count);
-                            Log.i("App", "Valor: " + count);
+                            String valor = contagem.getTime();
+                            notifyValue(valor);
+                            Log.i("App", "Valor: " + valor);
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -66,7 +67,7 @@ public class BoundService extends Service implements ServiceNotifier {
     }
 
     @Override
-    public void notifyValue(long value) {
+    public void notifyValue(String value) {
         obj.newValue(value);
     }
 
